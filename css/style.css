@@ -1,0 +1,41 @@
+.highlight{
+    background-color: #F1948A;
+}
+
+
+.close {
+    border: unset;
+    background-color: transparent;
+    position: absolute;
+    top: 55px;
+    right: 48px;
+    animation: animateBtn .3s linear forwards;
+}
+
+td {
+   vertical-align: middle;
+}
+
+.close i {
+    font-size: 25px;
+    color: red;
+}
+
+@keyframes animateBtn {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
+@media (min-width: 992px) {
+    .container {
+        width: 70%;
+    }
+}
+
+.validate{
+    font-size: 14px;
+    font-weight: bold;
+    opacity: 0;
+}
