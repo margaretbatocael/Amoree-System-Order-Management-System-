@@ -57,7 +57,7 @@ def putOrders():
     result = spcall("update_order", (order_id, order_date, order_details, quantity, customer_name, customer_address, customer_contactnum, total_amount, order_status), True)[0][0]
     return jsonify(result)
 
-@app.route('/orders', methods=["PUT"])
+@app.route('/status', methods=["PUT"])
 @auth.login_required
 def putOrdersTrack():
     params  = request.get_json()
@@ -80,4 +80,4 @@ def add_cors(resp):
 if __name__ == '__main__':
     app.debug=True
     port = 8000
-    app.run(host='0.0.0.0', port=port)
+    app.run(host='localhost', port=port)
