@@ -1,17 +1,15 @@
 <html>
   <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Sample Page">
+    <meta name="author" content="Sample B. Author">
     <title>THE AMOREE SYSTEM</title>
 
     <link rel="stylesheet" href="css/all.min.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
-          <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
 
   </head>
   <body>
@@ -23,14 +21,85 @@
          </div>
 
          <div>
-            <label for="">Input Order Information:</label>
-            <textarea  id="ProductDetails" class="form-control user-input" ></textarea>
-            <p class="validate text-danger" id="validateDescription">Please Enter Product Details</p>
+            <label for="date">Order Date:</label>
+            <input type="text"  placeholder="(YYYY-MM-DD)" class="form-control user-input" id="OrderDate" name="date" required>
 
-            <button class="btn btn-outline-info mt-3" id="add"  onclick="add_order()" >Add Order</button>
-            <button class="btn btn-outline-info mt-3" id="edit"  onclick="update_order()" >Update Order</button>
-            <button class="btn btn-outline-info mt-3" id="track"  onclick="track_order()" >Track Order</button> 
+            <label for="orders">Order Details:</label>
+            <input type="text" class="form-control user-input" id="OrderDetails" name="orders" required>
+
+            <label for="quantity">Quantity.:</label>
+            <input type="text"  class="form-control user-input" id="Quantity" name="quantity" required>
+
+            <label for="name">Customer Name:</label>
+            <input type="text" class="form-control user-input" id="CustomerName" name="name" required>
+        
+            <label for="address">Customer Address:</label>
+            <input type="text"  class="form-control user-input" id="CustomerAddress" name="address" required>
+
+            <label for="contact">Customer ContactNo.:</label>
+            <input type="text"  class="form-control user-input" id="CustomerContact" name="contact" required>
+            
+            <label for="amount">Total Amount.:</label>
+            <input type="text"  class="form-control user-input" id="TotalAmount" name="amount" required>
+
+            <label for="status">Order Status:</label>
+            <input type="text"  class="form-control user-input" id="OrderStatus" name="status" required>
+
+            <button class="btn btn-outline-info mt-3" id="Add" onclick="add_order()" >Add Order </button>
+
          </div>
+
+         <div>
+            <label for="id">Order ID:</label>
+            <input type="text" class="form-control user-input" id="e_OrderID" name="id" required>
+
+            <label for="date">Order Date:</label>
+            <input type="text"  placeholder="(YYYY-MM-DD)" class="form-control user-input" id="e_OrderDate" name="date" required>
+
+            <label for="orders">Order Details:</label>
+            <input type="text" class="form-control user-input" id="e_OrderDetails" name="orders" required>
+
+            <label for="quantity">Quantity.:</label>
+            <input type="text"  class="form-control user-input" id="e_Quantity" name="quantity" required>
+
+            <label for="name">Customer Name:</label>
+            <input type="text" class="form-control user-input" id="e_CustomerName" name="name" required>
+        
+            <label for="address">Customer Address:</label>
+            <input type="text"  class="form-control user-input" id="e_CustomerAddress" name="address" required>
+
+            <label for="contact">Customer ContactNo.:</label>
+            <input type="text"  class="form-control user-input" id="e_CustomerContact" name="contact" required>
+            
+            <label for="amount">Total Amount.:</label>
+            <input type="text"  class="form-control user-input" id="e_TotalAmount" name="amount" required>
+
+            <label for="status">Order Status:</label>
+            <input type="text"  class="form-control user-input" id="e_OrderStatus" name="status" required>
+
+            <button class="btn btn-outline-info mt-3" id="Edit" onclick="edit_order()">Update Order</button> 
+         </div>
+
+          <div>
+            <label for="id">Order ID:</label>
+            <input type="text" class="form-control user-input" id="t_OrderID" name="id" required>
+
+            <label for="status">Order Status:</label>
+            <input type="text"  class="form-control user-input" id="t_OrderStatus" name="status" required>
+
+            <button class="btn btn-outline-info mt-3" id="Track" onclick="track_order()">Track Order</button> 
+         </div>
+
+         <div>
+            <input type="text" class="form-control user-input" id="s_OrderDate" required>
+            <button class="btn btn-outline-info mt-3" id="Search" onclick="search_orders();">Search</button>
+         </div>
+            <div 
+                id="search" class="row marketing">
+            </div>
+
+
+         
 
          <div class="jumbotron">
              <p>
@@ -38,11 +107,11 @@
              </p>
            </div>
 
-             <div id="orders" class="row marketing">
+             <div id="view" class="row marketing">
              </div>
      </div>
      <script src="jQuery-2.1.4.min.js"></script>
-     <script src="bootstrap/js/bootstrap.min.js"></script>
+     <script src="js/bootstrap.min.js"></script>
      <script src="app.js"></script>
   </body>
 </html>
