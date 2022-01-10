@@ -3,7 +3,6 @@ CREATE TABLE IF NOT EXISTS users(
 );
 
 
-
 CREATE TABLE IF NOT EXISTS orders(
 		order_id serial PRIMARY KEY NOT NULL,
 		order_date date NOT NULL,
@@ -18,32 +17,19 @@ CREATE TABLE IF NOT EXISTS orders(
 
 
 
-CREATE OR REPLACE FUNCTION login(par_user_password varchar(10)) RETURNS json
+CREATE OR REPLACE FUNCTION login(par_user_id text) RETURNS json
 	LANGUAGE 'plpgsql' AS
 	$$
-DECLARE
-	loc_row record;
-	loc_password varchar(10);
-BEGIN
-	select into loc_row * from users where user_password = par_user_password;
-	
-	if loc_row.user_password isnull then return json_build_object(
-		'Error', 'Provide the correct password'
-	);
-	end if;
-		if loc_row.user_password = par_user_password then loc_password = par_user_password;
-			return json_build_object(
-				'Login', 'Successful'
-		);
-		else
-			return json_build_object(
-				'Error', 'Provide the correct password'
-		);
-		end if;
-END
+ declare
+    loc_password text;
+  begin
+     select into loc_password password from users where user_id = par_user_id;
+     if loc_password isnull then
+       loc_password = 'null';
+     end if;
+     return loc_password;
+ end;
 $$;
-
-
 
 CREATE OR REPLACE FUNCTION add_order(par_order_date date, 
 									 par_order_details text, 
@@ -61,7 +47,7 @@ BEGIN
 	VALUES(par_order_date, par_order_details, par_quantity, 
 		   par_customer_name, par_customer_address, par_customer_contactnum, par_total_amount, par_order_status);
 	RETURN json_build_object (
-		'Status', 'Successfully Added'
+		'status', 'OK'
 	);
 END
 $$;
@@ -80,23 +66,23 @@ BEGIN
 		total_amount, order_status from orders loop
 			loc_orders = loc_orders ||
 							json_build_object (
-								'Order ID', loc_row.order_id,
-								'Order Date', loc_row.order_date,
-								'Order Details', loc_row.order_details,
-								'Quantity', loc_row.quantity,
-								'Customer Name', loc_row.customer_name,
-								'Customer Address', loc_row.customer_address,
-								'Customer Contact Number', loc_row.customer_contactnum,
-								'Total Amount', loc_row.total_amount,
-								'Order Status', loc_row.order_status
+								'order_id', loc_row.order_id,
+								'order_date', loc_row.order_date,
+								'order_details', loc_row.order_details,
+								'quantity', loc_row.quantity,
+								'customer_name', loc_row.customer_name,
+								'customer_address', loc_row.customer_address,
+								'customer_contactnum', loc_row.customer_contactnum,
+								'total_amount', loc_row.total_amount,
+								'order_status', loc_row.order_status
 							);
-		loc_size = loc_size + 1;
-	end loop;
+			loc_size = loc_size + 1;
+		end loop;
 	
-	RETURN json_build_object(
-		'Status', 'Successfully Retrieved',
-		'Number of Orders', loc_size,
-		'Orders', loc_orders
+		RETURN json_build_object(
+			'status', 'OK',
+			'size', loc_size,
+			'orders', loc_orders
 		
 	);
 END
@@ -124,7 +110,7 @@ BEGIN
 					customer_contactnum = par_customer_contactnum,
 					total_amount = par_total_amount WHERE order_id = par_order_id;
 	RETURN json_build_object (
-		'Status', 'Succesfully Updated'
+		'status', 'OK'
 	);
 END
 $$;
@@ -138,7 +124,7 @@ BEGIN
 	UPDATE orders SET 
 	order_status = par_order_status WHERE order_id = par_order_id;
 	RETURN json_build_object (
-		'Status', 'Succesfully Tracked'
+		'status', 'OK'
 	);
 END
 $$;
@@ -157,30 +143,29 @@ BEGIN
 		total_amount, order_status from orders where order_date = par_order_date loop
 			loc_orders = loc_orders ||
 							json_build_object (
-								'Order ID', loc_row.order_id,
-								'Order Date', loc_row.order_date,
-								'Order Details', loc_row.order_details,
-								'Quantity', loc_row.quantity,
-								'Customer Name', loc_row.customer_name,
-								'Customer Address', loc_row.customer_address,
-								'Customer Contact Number', loc_row.customer_contactnum,
-								'Total Amount', loc_row.total_amount,
-								'Order Status', loc_row.order_status
+								'order_id', loc_row.order_id,
+								'order_date', loc_row.order_date,
+								'order_details', loc_row.order_details,
+								'quantity', loc_row.quantity,
+								'customer_name', loc_row.customer_name,
+								'customer_address', loc_row.customer_address,
+								'customer_contactnum', loc_row.customer_contactnum,
+								'total_amount', loc_row.total_amount,
+								'order_status', loc_row.order_status
 							);
 		loc_size = loc_size + 1;
 	end loop;
 	RETURN json_build_object(
-		'Status', 'OK',
-		'Number of Orders', loc_size,
-		'Orders', loc_orders
+		'status', 'OK',
+		'size', loc_size,
+		'orders', loc_orders
 		);
 	if loc_orders isnull then return json_build_object(
-	       'Status', 'No Orders Found'
+	       'status', 'No Orders Found'
 	   		);
 		
    end if;
      return loc_orders;
 END
 $$;
-
 
