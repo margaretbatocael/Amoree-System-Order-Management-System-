@@ -1,13 +1,13 @@
 # Amoree-Finds-Order-Management-System
 
-The Amoree System
+Amoree System
 
 CSC 181 Project by The Best-Teas
 
 Software Engineering
 
-Amoree Finds is an online clothing shop and The Amoree System is designed for easier managing of the orders.
-The Amoree System is an application that can add, edit, and search orders and update its order status(pending, completed, or cancelled).
+Amoree Finds is an online clothing shop and Amoree System is designed for easier managing of the orders.
+Amoree System is an application that can add, edit, and search orders and update its order status(pending, completed, or cancelled).
 
 1. Clone this repo. Create a database on POSTGRESQL, the database name is __"Amoree"__. Create tables and functions on __"Amoree"__ database, copy the code from the __amoree.sql__ file.
     ```bash
