@@ -71,4 +71,4 @@ Amoree System is an application that can add, edit, and search orders and update
 
 #
 
-7. Enjoy!
+5. Thank you. Enjoy!
