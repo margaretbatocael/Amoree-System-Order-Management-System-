@@ -73,6 +73,7 @@ def add_cors(resp):
     resp.headers['Access-Control-Allow-Methods'] = 'POST, OPTIONS, GET, PUT, DELETE'
     resp.headers['Access-Control-Allow-Headers'] = flask.request.headers.get('Access-Control-Request-Headers',
                                                                              'Authorization')
+    
     if app.debug:
         resp.headers["Access-Control-Max-Age"] = '1'
     return resp
@@ -81,3 +82,5 @@ if __name__ == '__main__':
     app.debug=True
     port = 8000
     app.run(host='localhost', port=port)
+
+    
