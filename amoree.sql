@@ -3,6 +3,7 @@ CREATE TABLE IF NOT EXISTS users(
 );
 
 
+
 CREATE TABLE IF NOT EXISTS orders(
 		order_id serial PRIMARY KEY NOT NULL,
 		order_date date NOT NULL,
@@ -30,6 +31,8 @@ CREATE OR REPLACE FUNCTION login(par_user_id text) RETURNS json
      return loc_password;
  end;
 $$;
+
+
 
 CREATE OR REPLACE FUNCTION add_order(par_order_date date, 
 									 par_order_details text, 
@@ -161,11 +164,12 @@ BEGIN
 		'orders', loc_orders
 		);
 	if loc_orders isnull then return json_build_object(
-	       'status', 'No Orders Found'
+	       'status', 'No orders found.'
 	   		);
 		
    end if;
      return loc_orders;
 END
 $$;
+
 
