@@ -3,7 +3,6 @@ CREATE TABLE IF NOT EXISTS users(
 );
 
 
-
 CREATE TABLE IF NOT EXISTS orders(
 		order_id serial PRIMARY KEY NOT NULL,
 		order_date date NOT NULL,
@@ -32,16 +31,14 @@ CREATE OR REPLACE FUNCTION login(par_user_id text) RETURNS json
  end;
 $$;
 
-
-
 CREATE OR REPLACE FUNCTION add_order(par_order_date date, 
-									 par_order_details text, 
-									 par_quantity numeric,
-									 par_customer_name text,
-									 par_customer_address text,
-									 par_customer_contactnum varchar(11),
-									 par_total_amount numeric,
-									 par_order_status text) RETURNS json
+					par_order_details text, 
+					par_quantity numeric,
+					par_customer_name text,
+					par_customer_address text,
+					par_customer_contactnum varchar(11),
+					par_total_amount numeric,
+					par_order_status text) RETURNS json
 	LANGUAGE 'plpgsql' AS
 	$$
 BEGIN
@@ -94,14 +91,14 @@ $$;
 
 
 CREATE OR REPLACE FUNCTION update_order(par_order_id bigint,
-									 par_order_date date, 
-									 par_order_details text, 
-									 par_quantity numeric,
-									 par_customer_name text,
-									 par_customer_address text,
-									 par_customer_contactnum varchar(11),
-									 par_total_amount numeric,
-									 par_order_status text) RETURNS json
+					par_order_date date, 
+					par_order_details text, 
+					par_quantity numeric,
+					par_customer_name text,
+					par_customer_address text,
+					par_customer_contactnum varchar(11),
+					par_total_amount numeric,
+					par_order_status text) RETURNS json
 	LANGUAGE 'plpgsql' AS
 	$$
 BEGIN
@@ -164,12 +161,11 @@ BEGIN
 		'orders', loc_orders
 		);
 	if loc_orders isnull then return json_build_object(
-	       'status', 'No orders found.'
+	       'status', 'No Orders Found'
 	   		);
 		
    end if;
      return loc_orders;
 END
 $$;
-
 
