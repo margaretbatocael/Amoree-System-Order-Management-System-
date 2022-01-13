@@ -29,7 +29,7 @@ def spcall(qry, param, commit=False):
         return res
 
 
-#print(spcall("login", ("amoree",)))
+# print(spcall("login", ("amoree",)))
 # print(spcall("add_order", ('2021-12-25', '3 socks, 2 Christmas hat', '5', 'Freny', 'Tibanga','09647290124', '500','pending')))
 # print(spcall("view_orders", ()))
 # print(spcall("track_order", ("5","cancelled",)))
